@@ -1,0 +1,10 @@
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\bin\x64\Debug\SortCommon.dll
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\bin\x64\Debug\SortCommon.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\bin\x64\Debug\halcondotnet.dll
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\bin\x64\Debug\System.Data.SQLite.dll
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\bin\x64\Debug\System.Data.SQLite.xml
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\obj\x64\Debug\SortCommon.csprojAssemblyReference.cache
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\obj\x64\Debug\SortCommon.csproj.CoreCompileInputs.cache
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\obj\x64\Debug\SortCommon.csproj.CopyComplete
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\obj\x64\Debug\SortCommon.dll
+D:\Work1\mySortting\mySortting\Sotting\SortCommon\obj\x64\Debug\SortCommon.pdb

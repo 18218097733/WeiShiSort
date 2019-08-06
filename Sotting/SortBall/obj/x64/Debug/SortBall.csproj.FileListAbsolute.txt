@@ -1,0 +1,16 @@
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortBall.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortBall.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SorDal.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortCommon.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortModel.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\System.Data.SQLite.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\halcondotnet.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SorDal.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortCommon.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\SortModel.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortBall\bin\x64\Debug\System.Data.SQLite.xml
+D:\Work1\mySortting\mySortting\Sotting\SortBall\obj\x64\Debug\SortBall.csprojAssemblyReference.cache
+D:\Work1\mySortting\mySortting\Sotting\SortBall\obj\x64\Debug\SortBall.csproj.CoreCompileInputs.cache
+D:\Work1\mySortting\mySortting\Sotting\SortBall\obj\x64\Debug\SortBall.csproj.CopyComplete
+D:\Work1\mySortting\mySortting\Sotting\SortBall\obj\x64\Debug\SortBall.dll
+D:\Work1\mySortting\mySortting\Sotting\SortBall\obj\x64\Debug\SortBall.pdb

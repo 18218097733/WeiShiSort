@@ -1,0 +1,6 @@
+D:\Work1\mySortting\mySortting\Sotting\SortModel\bin\x64\Release\SortModel.dll
+D:\Work1\mySortting\mySortting\Sotting\SortModel\bin\x64\Release\SortModel.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Release\SortModel.csprojAssemblyReference.cache
+D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Release\SortModel.csproj.CoreCompileInputs.cache
+D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Release\SortModel.dll
+D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Release\SortModel.pdb

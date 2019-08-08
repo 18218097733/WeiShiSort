@@ -25,3 +25,5 @@ D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Debug\SortUI.csproj.CoreCompil
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Debug\SortUI.csproj.CopyComplete
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Debug\UI.exe
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Debug\UI.pdb
+D:\Work1\mySortting\mySortting\Sotting\UI\bin\x64\Debug\CLIDelegate.dll
+D:\Work1\mySortting\mySortting\Sotting\UI\bin\x64\Debug\ThridLibray.dll

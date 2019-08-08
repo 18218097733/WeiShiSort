@@ -1,0 +1,14 @@
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SorDal.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SorDal.pdb
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SortCommon.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SortModel.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\System.Data.SQLite.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\halcondotnet.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SortCommon.pdb
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\SortModel.pdb
+D:\Work1\mySortting\mySortting\Sotting\SorDal\bin\x64\Release\System.Data.SQLite.xml
+D:\Work1\mySortting\mySortting\Sotting\SorDal\obj\x64\Release\SortDal.csprojAssemblyReference.cache
+D:\Work1\mySortting\mySortting\Sotting\SorDal\obj\x64\Release\SortDal.csproj.CoreCompileInputs.cache
+D:\Work1\mySortting\mySortting\Sotting\SorDal\obj\x64\Release\SortDal.csproj.CopyComplete
+D:\Work1\mySortting\mySortting\Sotting\SorDal\obj\x64\Release\SorDal.dll
+D:\Work1\mySortting\mySortting\Sotting\SorDal\obj\x64\Release\SorDal.pdb

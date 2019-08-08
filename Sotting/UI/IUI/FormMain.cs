@@ -26,14 +26,19 @@ namespace UI.IUI
         private bool mLinkConnect = false;
         private bool mLinkConnect2 = false;
         bool IsSavaCode=false;
-        int mTimeOut = 0,mTimOut2=0;
-        int mPeriodCheck = 0;
+        int mTimOut2=0;
         string weightStr;
         string url;
         private string workConsole;
         DataTable dt = new DataTable("Datas");
         string pattern = @"[-|;|:|,|\/|\(|\)|\[|\]|\}|\{|%|@|\*|!|\']";
-        Dictionary<int, List<string>> dic = new Dictionary<int, List<string>>();
+        /**改变方向* */
+        static string CHANGE_DIRECTION = "0106801E000781CE";
+        /** 刹车* */
+        private static string BRACK = "0106801E0005000F";
+        /** 使能* */
+        private static string ENABLE = "0106801E0003800D";
+        private int stopTime;
 
         public FormMain()
         {
@@ -64,17 +69,16 @@ namespace UI.IUI
         private HalconHelper halconHelper;
 
         private int CodeSum=0;
-        private int time1;
         private void LoadFormInfo()
         {
             try
             {
                 halconHelper = new HalconHelper(hWindowControl1.HalconWindow);
-                List<IDeviceInfo> li = Enumerator.EnumerateDevices();
+                List<IDeviceInfo> li = ThridLibray.Enumerator.EnumerateDevices();
                 //if (Convert.ToInt32(this.Tag) != -1)
                 if (li.Count > 0)
                 {
-                    m_dev = Enumerator.GetDeviceByIndex(0);
+                    m_dev = ThridLibray.Enumerator.GetDeviceByIndex(0);
                     //m_dev = Enumerator.GetDeviceByIndex(Convert.ToInt32(this.Tag));
                     // 注册链接时间
 
@@ -126,7 +130,6 @@ namespace UI.IUI
             {
                 Catcher.Show(ex);
             }
-
         }
 
         private void OnWeightDataReceived(byte[] readBuffer)
@@ -142,16 +145,15 @@ namespace UI.IUI
                 weightStr = Encoding.UTF8.GetString(readstring).TrimEnd('\0');
                 if (InvokeRequired)
                 {
-
-                  BeginInvoke(new MethodInvoker(() =>
-                  {
-                      if (!mLinkConnect2)
+                      BeginInvoke(new MethodInvoker(() =>
                       {
-                          lbWeighter.BackColor = Color.Lime;
-                          mLinkConnect2 = true;
-                      }
-                      lbWeight.Text = "重量    " + weightStr+"Kg";
-                  }));
+                          if (!mLinkConnect2)
+                          {
+                              lbWeighter.BackColor = Color.Lime;
+                              mLinkConnect2 = true;
+                          }
+                          lbWeight.Text = "重量    " + weightStr+"Kg";
+                      }));
                 }
             }
             catch
@@ -162,56 +164,11 @@ namespace UI.IUI
         private void OnDataReceived(byte[] readBuffer)
         {
             var readstring = Encoding.UTF8.GetString(readBuffer);
-            if(readstring.Contains("AT"))
-            {             
-                mTimeOut = 0;
-
-                BeginInvoke(new MethodInvoker(() =>
-                {
-                    if (!mLinkConnect)
-                    {
-                        lbMotor.BackColor = Color.Lime;
-                        mLinkConnect = true;
-                    }
-                }));
-            }
-            if(readstring.Contains("win"))
+            BeginInvoke(new MethodInvoker(() =>
             {
-                STM32Ready = true;
-            }
-            else if (readstring.Contains("warning"))
-            {
-                BeginInvoke(new MethodInvoker(() =>
-                {
-                    //DialogResult dr = MessageBox.Show("电机异常，请检查设备并重启", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //if (dr == DialogResult.OK)
-                    //{
-                    //    System.Environment.Exit(0);
-                    //}
-                }));
-            }
-            if (readstring.Contains("two"))
-            {
-                BeginInvoke(new MethodInvoker(() =>
-                {
-                    //DialogResult dr = MessageBox.Show("跑步机1异常，请检查设备", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //if (dr == DialogResult.OK)
-                    //{
-                    //    System.Environment.Exit(0);
-                    //}
-                }));
-            }
-            if (readstring.Contains("five"))
-            {
-                BeginInvoke(new MethodInvoker(() =>
-                {
-                    //DialogResult dr = MessageBox.Show("跑步机2异常，请检查设备", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //if (dr == DialogResult.OK)
-                    //{
-                    //    System.Environment.Exit(0);
-                    //}
-                }));
-            }
+                lbRate.Text = "readstring";
+            }));
+            
         }
 
         private void OnError(object sender, OnErrorEventArgs e)
@@ -234,15 +191,14 @@ namespace UI.IUI
 
 
         long nowtick,firsttick;
-        double rate;
+        
+        string code = "";
         private void OnComplete(object sender, OnCompleteEventArgs e)
         {
-            string portNum ;
             string rotation_RL="false";
             string  httpResponse;
             string time =DateTime.Now.ToString();          
            
-
             if (CodeSum==0)//记录第一次扫到条码的时间
             {
                 firsttick = TimeTransitionHelper.GetCurrentTimeUnix();
@@ -254,72 +210,60 @@ namespace UI.IUI
             }));
             try
             {
-                if (STM32Ready && mLinkConnect)
+                if (NetWork.IsConnectInternet())
                 {
-                    if (NetWork.IsConnectInternet())
-                    {
-                        string data = "[{\"ticketsNum\":\"" + e.DataStrings + "\",\"workConsole\":\"" + workConsole + "\"}]";
-                        httpResponse = HttpHelper.PostDataGetHtml(url, data);
-                        JObject array = (JObject)JsonConvert.DeserializeObject(httpResponse);
-                        portNum = array["port"].ToString().Trim('"');
-                        rotation_RL = array["success"].ToString();
-                    }
+                    string data = "[{\"ticketsNum\":\"" + e.DataStrings + "\",\"workConsole\":\"" + workConsole + "\"}]";
+                    httpResponse = HttpHelper.PostDataGetHtml(url, data);
+                    JObject array = (JObject)JsonConvert.DeserializeObject(httpResponse);
+                    rotation_RL = array["success"].ToString();
+                    if (rotation_RL.Contains("ture"))
+                        Forward(1);
                     else
-                    {
-                        return;
-                    }
-                    CodeSum++;
-                    nowtick = TimeTransitionHelper.GetCurrentTimeUnix();
-                    if((nowtick - firsttick) / 3600<1)
-                        rate = (int)(CodeSum / ((nowtick - firsttick) / 3600+1));
-                    else
-                        rate = CodeSum / ((nowtick - firsttick) / 3600.0);
+                        Forward(0);
 
+                    CodeSum++;
                     this.Invoke(new Action(() =>
                     {
                         lbSum.Text = "总数    " + Convert.ToString(CodeSum) + "/件";
-                        lbRate.Text = "速率    " + rate.ToString("#0.00") + "件/小时";
-                        lbDestination.Text = "目的地    " + portNum+"号口";                   
+                        //lbRate.Text = "     已同步      ";
+                        lbDestination.Text = "目的地    " +  "无";
                         if (dt != null)
                         {
                             if (dgvData.RowCount > 3000)
                             {
-                                if (IsSavaCode)
-                                {
-                                    string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\条码记录";
-                                    if (!System.IO.Directory.Exists(dir))
-                                    {
-                                        //创建pic文件夹
-                                        System.IO.Directory.CreateDirectory(dir);
-                                    }
-                                    string time2 = Regex.Replace(time, pattern, string.Empty, RegexOptions.IgnoreCase);
-                                    ExcelHelper.ExportToExcel(dt, dir + "\\" + time2 + ".xls");
-                                }
+                                SaveLog();
                                 dt.Clear();
                             }
-                            DataRow dr = dt.NewRow();                          
+                            DataRow dr = dt.NewRow();
                             dr["单号"] = e.DataStrings;
                             dr["重量(Kg)"] = weightStr;
-                            dr["目的地"] = portNum + "号口";
+                            dr["目的地"] = "无";
                             dr["时间"] = time;
                             dr["扫描时间(ms)"] = e.UseTime;
                             dt.Rows.Add(dr);
                             dgvData.FirstDisplayedScrollingRowIndex = dgvData.Rows.Count - 1;
                         }
                     }));
-                    if (rotation_RL.Contains("ture"))
-                        portNum = "1";
-                    else
-                        portNum = "0";
-                    //string sendstr = "win" + portNum + "\r\n";
-                    string sendstr = "win" + portNum + "\r\n";
-                    byte[] send = Encoding.Default.GetBytes(sendstr);
-                    serialComm.WritePort(send, 0, send.Length);
-                    STM32Ready = false;
-                    time1 = Environment.TickCount;
                 }
+                else
+                {
+                   
+                    if(code!=e.DataStrings)
+                    {
+                        code = e.DataStrings;
+                        if (Convert.ToInt32(code) % 2 == 0)
+                            Forward(1);
+                        else
+                            Forward(0);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+                }      
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
             }
         }
@@ -375,7 +319,9 @@ namespace UI.IUI
         {
             try
             {
+                SaveLog();
                 m_dev.TriggerSet.Close();
+                
             }
             catch(Exception ex)
             {
@@ -383,31 +329,29 @@ namespace UI.IUI
             }
             System.Environment.Exit(0);
         }
-
-        /// <summary>
-        /// 暂时用不上,会增加工作量
-        /// </summary>
-        /// <param name="bmp"></param>
-        /// <param name="image"></param>
-        // C# bitmap变量转为 halcon变量
-        private void Bitmap2HObject(Bitmap bmp, out HObject image)
+        //跑步机前进或后退
+        void Forward(int mode)
         {
-            try
+            if (mode == 0)
             {
-                Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
-
-                BitmapData srcBmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, PixelFormat.Format8bppIndexed);
-
-                HOperatorSet.GenImage1(out image, "byte", bmp.Width, bmp.Height, srcBmpData.Scan0);
-                bmp.UnlockBits(srcBmpData);
+                byte[] send = Encoding.Default.GetBytes(CHANGE_DIRECTION);
+                serialComm.WritePort(send, 0, send.Length);
+                stopTime = 5;
             }
-            catch (Exception ex)
+            else
             {
-                image = null;
+                byte[] send = Encoding.Default.GetBytes(ENABLE);
+                serialComm.WritePort(send, 0, send.Length);
+                stopTime = 5;
             }
         }
 
-
+        //跑步机停止
+        void StopForward()
+        {
+            byte[] send = Encoding.Default.GetBytes(BRACK);
+            serialComm.WritePort(send, 0, send.Length);
+        }
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (myFormSetting == null || myFormSetting.IsDisposed)
@@ -530,15 +474,16 @@ namespace UI.IUI
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            mTimeOut++;
-            mTimOut2++;
-            if (mTimeOut >= 3)
+            if(stopTime>0)
             {
-                lbMotor.BackColor = Color.Red;
-                mLinkConnect = false;
-                mTimeOut = 3;
+                stopTime--;
+                if(stopTime<=0)
+                {
+                    StopForward();
+                }
             }
-            if(mTimOut2 >= 3)
+            mTimOut2++;
+            if (mTimOut2 >= 3)
             {
                 lbWeighter.BackColor = Color.Red;
                 mLinkConnect2 = false;
@@ -550,38 +495,41 @@ namespace UI.IUI
             }
             else
                 lbNetwork.BackColor = Color.Red;
-            if (mPeriodCheck++ >= 1) 
-            {
-                string sendstr = "AT\r\n";
-                byte[] send = Encoding.Default.GetBytes(sendstr);
-                serialComm.WritePort(send, 0, send.Length);
-                mPeriodCheck = 0;
-            }
 
-            if (Environment.TickCount - time1 > 10000)
+            //if (!STM32Ready && mLinkConnect&& CodeSum!=0)
+            //{
+            //    nowtick = TimeTransitionHelper.GetCurrentTimeUnix();
+            //    nowtick = TimeTransitionHelper.GetCurrentTimeUnix();
+            //    if ((nowtick - firsttick) / 3600 < 1)
+            //        rate = (int)(CodeSum / ((nowtick - firsttick) / 3600 + 1));
+            //    else
+            //        rate = CodeSum / ((nowtick - firsttick) / 3600.0);
+            //    lbRate.Text = "速率    " + rate.ToString("#0.00") + "件/小时";
+            //}
+        }
+        private void SaveLog()
+        {
+            try
             {
-                if (!STM32Ready)  {
-
-                    timer1.Enabled = false;
-                    DialogResult dr=MessageBox.Show("电机异常，请检查设备并重启", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if(dr== DialogResult.OK)
+                if (IsSavaCode)
+                {
+                    string time = DateTime.Now.ToString();
+                    string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\条码记录";
+                    if (!System.IO.Directory.Exists(dir))
                     {
-                        System.Environment.Exit(0);
+                        //创建pic文件夹
+                        System.IO.Directory.CreateDirectory(dir);
                     }
+                    string time2 = Regex.Replace(time, pattern, string.Empty, RegexOptions.IgnoreCase);
+                    ExcelHelper.ExportToExcel(dt, dir + "\\" + time2 + ".xls");
                 }
             }
-            if (!STM32Ready && mLinkConnect&& CodeSum!=0)
+            catch(Exception ex)
             {
-                nowtick = TimeTransitionHelper.GetCurrentTimeUnix();
-                nowtick = TimeTransitionHelper.GetCurrentTimeUnix();
-                if ((nowtick - firsttick) / 3600 < 1)
-                    rate = (int)(CodeSum / ((nowtick - firsttick) / 3600 + 1));
-                else
-                    rate = CodeSum / ((nowtick - firsttick) / 3600.0);
-                lbRate.Text = "速率    " + rate.ToString("#0.00") + "件/小时";
-            }
-        }
 
+            }
+
+        }
         private void FormMain_Resize(object sender, EventArgs e)
         {
             float newx = (this.Width) / x;

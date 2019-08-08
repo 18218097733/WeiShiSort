@@ -242,7 +242,7 @@ namespace SortCommon
         {
             HTuple hv_BarCodeHandle = new HTuple();
             HTuple hv_MeasThreshAbsValue = new HTuple();
-            HObject ho_SymbolRegions = null,ho_BarCodeObjects = null,ho_ObjectSelected, ho_ImageMirror2;
+            HObject ho_SymbolRegions = null,ho_BarCodeObjects = null,ho_ObjectSelected;
             HTuple hv_CodeTypes = new HTuple();
             HTuple hv_DecodedDataStrings = new HTuple(),hv_DecodedDataTypes = new HTuple();
             HTuple hv_Start = new HTuple(), hv_Stop = new HTuple(), hv_Duration = new HTuple();
@@ -253,7 +253,6 @@ namespace SortCommon
             try
             {
                 // Initialize local and output iconic variables  
-                HOperatorSet.GenEmptyObj(out ho_ImageMirror2);
                 HOperatorSet.GenEmptyObj(out ho_SymbolRegions);
                 HOperatorSet.GenEmptyObj(out ho_BarCodeObjects);
                 HOperatorSet.GenEmptyObj(out ho_ObjectSelected);
@@ -261,12 +260,10 @@ namespace SortCommon
 
                 HTuple Pointer, type, Width, Height;
 
-                ho_ImageMirror2.Dispose();
-                HOperatorSet.MirrorImage(ho_Image, out ho_ImageMirror2, "row");
-                HOperatorSet.GetImagePointer1(ho_ImageMirror2, out Pointer, out type, out Width, out Height);
+                HOperatorSet.GetImagePointer1(ho_Image, out Pointer, out type, out Width, out Height);
                 HOperatorSet.SetPart(hv_ExpDefaultWinHandle, 0, 0, Height, Width);
 
-                HOperatorSet.DispObj(ho_ImageMirror2, hv_ExpDefaultWinHandle);
+                HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
 
                 //hv_MeasThreshAbsValue = 10.0;
                 //hv_CodeTypes = "auto";
@@ -292,7 +289,7 @@ namespace SortCommon
                 // HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "stop_after_result_num", 2);
                 ho_SymbolRegions.Dispose();
                 HOperatorSet.CountSeconds(out hv_Start);
-                HOperatorSet.FindBarCode(ho_ImageMirror2, out ho_SymbolRegions, hv_BarCodeHandle, hv_CodeTypes, out hv_DecodedDataStrings);
+                HOperatorSet.FindBarCode(ho_Image, out ho_SymbolRegions, hv_BarCodeHandle, hv_CodeTypes, out hv_DecodedDataStrings);
                 HOperatorSet.CountSeconds(out hv_Stop);
                 hv_Duration = (hv_Stop - hv_Start) * 1000;
                 ho_BarCodeObjects.Dispose();
@@ -310,9 +307,7 @@ namespace SortCommon
                     if (Complete != null)
                     {
                         this.Complete(this, new OnCompleteEventArgs(hv_DecodedDataStrings.S, Codetype, hv_Duration));
-                    }  
-
-                  
+                    }      
                 }
                 else
                 {
@@ -330,7 +325,6 @@ namespace SortCommon
                 }
                 HOperatorSet.ClearBarCodeModel(hv_BarCodeHandle);
                 ho_Image.Dispose();
-                ho_ImageMirror2.Dispose();
                 ho_SymbolRegions.Dispose();
                 ho_BarCodeObjects.Dispose();
 
@@ -342,10 +336,6 @@ namespace SortCommon
             finally
             {
             }
-
-        }
-        public static void Action(HObject ho_Image)
-        {
 
         }
 

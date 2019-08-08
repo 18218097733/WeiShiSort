@@ -46,14 +46,13 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lbCemra = new System.Windows.Forms.Label();
-            this.lbMotor = new System.Windows.Forms.Label();
             this.lbNetwork = new System.Windows.Forms.Label();
             this.lbWeighter = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
@@ -131,7 +130,7 @@
             this.lbDestination.Name = "lbDestination";
             this.lbDestination.Size = new System.Drawing.Size(231, 33);
             this.lbDestination.TabIndex = 2;
-            this.lbDestination.Text = "目的地";
+            this.lbDestination.Text = "速率";
             this.lbDestination.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbWeight
@@ -177,7 +176,7 @@
             this.dgvData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvData.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+            this.dgvData.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -186,10 +185,8 @@
             this.Column4,
             this.Column5});
             this.tableLayoutPanel1.SetColumnSpan(this.dgvData, 2);
-            this.dgvData.ContextMenuStrip = this.contextMenuStrip1;
             this.dgvData.Location = new System.Drawing.Point(3, 334);
             this.dgvData.Name = "dgvData";
-            this.dgvData.ReadOnly = true;
             this.dgvData.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvData.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
@@ -249,7 +246,6 @@
             this.panel1.BackColor = System.Drawing.Color.DarkKhaki;
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 2);
             this.panel1.Controls.Add(this.lbCemra);
-            this.panel1.Controls.Add(this.lbMotor);
             this.panel1.Controls.Add(this.lbNetwork);
             this.panel1.Controls.Add(this.lbWeighter);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -268,21 +264,11 @@
             this.lbCemra.TabIndex = 3;
             this.lbCemra.Text = "相机";
             // 
-            // lbMotor
-            // 
-            this.lbMotor.AutoSize = true;
-            this.lbMotor.BackColor = System.Drawing.Color.Red;
-            this.lbMotor.Location = new System.Drawing.Point(97, 0);
-            this.lbMotor.Name = "lbMotor";
-            this.lbMotor.Size = new System.Drawing.Size(29, 12);
-            this.lbMotor.TabIndex = 2;
-            this.lbMotor.Text = "电机";
-            // 
             // lbNetwork
             // 
             this.lbNetwork.AutoSize = true;
             this.lbNetwork.BackColor = System.Drawing.Color.Red;
-            this.lbNetwork.Location = new System.Drawing.Point(144, 0);
+            this.lbNetwork.Location = new System.Drawing.Point(97, 0);
             this.lbNetwork.Name = "lbNetwork";
             this.lbNetwork.Size = new System.Drawing.Size(29, 12);
             this.lbNetwork.TabIndex = 1;
@@ -297,6 +283,11 @@
             this.lbWeighter.Size = new System.Drawing.Size(29, 12);
             this.lbWeighter.TabIndex = 0;
             this.lbWeighter.Text = "称台";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // menuStrip1
             // 
@@ -329,11 +320,6 @@
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             this.notifyIcon1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDown);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // FormMain
             // 
@@ -380,7 +366,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbCemra;
-        private System.Windows.Forms.Label lbMotor;
         private System.Windows.Forms.Label lbNetwork;
         private System.Windows.Forms.Label lbWeighter;
         private System.Windows.Forms.NotifyIcon notifyIcon1;

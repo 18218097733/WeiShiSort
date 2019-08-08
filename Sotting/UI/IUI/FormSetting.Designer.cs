@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tCtest = new System.Windows.Forms.TabControl();
             this.tabPageHttp = new System.Windows.Forms.TabPage();
             this.btHttp = new System.Windows.Forms.Button();
             this.tbURL = new System.Windows.Forms.TextBox();
@@ -47,30 +47,29 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cBWeightComm = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonOther = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBoxSaveCode = new System.Windows.Forms.CheckBox();
-            this.tabControl1.SuspendLayout();
+            this.buttonOther = new System.Windows.Forms.Button();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tCtest.SuspendLayout();
             this.tabPageHttp.SuspendLayout();
             this.tabPageWalk.SuspendLayout();
             this.tabPageWeigher.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tCtest
             // 
-            this.tabControl1.Controls.Add(this.tabPageHttp);
-            this.tabControl1.Controls.Add(this.tabPageWalk);
-            this.tabControl1.Controls.Add(this.tabPageWeigher);
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(634, 290);
-            this.tabControl1.TabIndex = 0;
+            this.tCtest.Controls.Add(this.tabPageHttp);
+            this.tCtest.Controls.Add(this.tabPageWalk);
+            this.tCtest.Controls.Add(this.tabPageWeigher);
+            this.tCtest.Controls.Add(this.tabPage1);
+            this.tCtest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tCtest.Location = new System.Drawing.Point(0, 0);
+            this.tCtest.Name = "tCtest";
+            this.tCtest.SelectedIndex = 0;
+            this.tCtest.Size = new System.Drawing.Size(634, 290);
+            this.tCtest.TabIndex = 0;
             // 
             // tabPageHttp
             // 
@@ -285,6 +284,34 @@
             this.label6.TabIndex = 4;
             this.label6.Text = "串口设置";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Location = new System.Drawing.Point(19, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(583, 58);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            // 
+            // checkBoxSaveCode
+            // 
+            this.checkBoxSaveCode.AutoSize = true;
+            this.checkBoxSaveCode.Location = new System.Drawing.Point(23, 20);
+            this.checkBoxSaveCode.Name = "checkBoxSaveCode";
+            this.checkBoxSaveCode.Size = new System.Drawing.Size(96, 16);
+            this.checkBoxSaveCode.TabIndex = 0;
+            this.checkBoxSaveCode.Text = "保存条码记录";
+            this.checkBoxSaveCode.UseVisualStyleBackColor = true;
+            // 
+            // buttonOther
+            // 
+            this.buttonOther.Location = new System.Drawing.Point(527, 233);
+            this.buttonOther.Name = "buttonOther";
+            this.buttonOther.Size = new System.Drawing.Size(75, 23);
+            this.buttonOther.TabIndex = 3;
+            this.buttonOther.Text = "确定";
+            this.buttonOther.UseVisualStyleBackColor = true;
+            this.buttonOther.Click += new System.EventHandler(this.buttonOther_Click);
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.buttonOther);
@@ -297,49 +324,19 @@
             this.tabPage1.Text = "其它设置";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // buttonOther
-            // 
-            this.buttonOther.Location = new System.Drawing.Point(527, 233);
-            this.buttonOther.Name = "buttonOther";
-            this.buttonOther.Size = new System.Drawing.Size(75, 23);
-            this.buttonOther.TabIndex = 3;
-            this.buttonOther.Text = "确定";
-            this.buttonOther.UseVisualStyleBackColor = true;
-            this.buttonOther.Click += new System.EventHandler(this.buttonOther_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.checkBoxSaveCode);
-            this.groupBox2.Location = new System.Drawing.Point(19, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(583, 58);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "条码记录";
-            // 
-            // checkBoxSaveCode
-            // 
-            this.checkBoxSaveCode.AutoSize = true;
-            this.checkBoxSaveCode.Location = new System.Drawing.Point(23, 20);
-            this.checkBoxSaveCode.Name = "checkBoxSaveCode";
-            this.checkBoxSaveCode.Size = new System.Drawing.Size(96, 16);
-            this.checkBoxSaveCode.TabIndex = 0;
-            this.checkBoxSaveCode.Text = "保存条码记录";
-            this.checkBoxSaveCode.UseVisualStyleBackColor = true;
-            // 
             // FormSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 290);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tCtest);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSetting";
             this.Text = "设置";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSetting_FormClosing);
             this.Load += new System.EventHandler(this.FormSetting_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tCtest.ResumeLayout(false);
             this.tabPageHttp.ResumeLayout(false);
             this.tabPageHttp.PerformLayout();
             this.tabPageWalk.ResumeLayout(false);
@@ -347,15 +344,13 @@
             this.tabPageWeigher.ResumeLayout(false);
             this.tabPageWeigher.PerformLayout();
             this.tabPage1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tCtest;
         private System.Windows.Forms.TabPage tabPageHttp;
         private System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.Label label3;
@@ -372,11 +367,11 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cBWeightComm;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.CheckBox checkBoxSaveCode;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button buttonOther;
         private System.Windows.Forms.ComboBox cbWorkSole;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Button buttonOther;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox checkBoxSaveCode;
     }
 }

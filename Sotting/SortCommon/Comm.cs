@@ -62,6 +62,7 @@ namespace SortCommon
         {
             while (_keepReading)
             {
+                Thread.Sleep(1);
                 if (_serialPort.IsOpen)
                 {
                     int count = _serialPort.BytesToRead;
@@ -72,7 +73,8 @@ namespace SortCommon
                         {
                             //Application.DoEvents();
                             _serialPort.Read(readBuffer, 0, count);
-                            DateReceived?.Invoke(readBuffer);//这句是收到数据后的方法调用，委托自己写
+                            DateReceived?.Invoke(readBuffer);//这句是收到数据后的方法调用，委托自己写 
+                            
                         }
                         catch (TimeoutException)
                         {
@@ -97,7 +99,7 @@ namespace SortCommon
                     //MessageBox.Show("串口打开失败!");
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 //MessageBox.Show("串口不存在，请更换串口");
             }

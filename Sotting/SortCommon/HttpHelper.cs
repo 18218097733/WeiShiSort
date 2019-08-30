@@ -30,6 +30,7 @@ namespace SortCommon
                 }
                 req.Method = "POST";
                 req.KeepAlive = true;
+                //req.Timeout = 300000;
                 req.ContentType = "application/json";
                 req.ContentLength = data.Length;
                 req.AllowAutoRedirect = true;

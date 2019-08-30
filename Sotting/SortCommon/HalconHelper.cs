@@ -241,8 +241,8 @@ namespace SortCommon
         public void BarRecognition(HObject ho_Image)
         {
             HTuple hv_BarCodeHandle = new HTuple();
-            HTuple hv_MeasThreshAbsValue = new HTuple();
             HObject ho_SymbolRegions = null,ho_BarCodeObjects = null,ho_ObjectSelected;
+            HObject ho_ImageEmphasize;
             HTuple hv_CodeTypes = new HTuple();
             HTuple hv_DecodedDataStrings = new HTuple(),hv_DecodedDataTypes = new HTuple();
             HTuple hv_Start = new HTuple(), hv_Stop = new HTuple(), hv_Duration = new HTuple();
@@ -252,7 +252,8 @@ namespace SortCommon
 
             try
             {
-                // Initialize local and output iconic variables  
+                // Initialize local and output iconic variables 
+                HOperatorSet.GenEmptyObj(out ho_ImageEmphasize);
                 HOperatorSet.GenEmptyObj(out ho_SymbolRegions);
                 HOperatorSet.GenEmptyObj(out ho_BarCodeObjects);
                 HOperatorSet.GenEmptyObj(out ho_ObjectSelected);
@@ -264,7 +265,11 @@ namespace SortCommon
                 HOperatorSet.SetPart(hv_ExpDefaultWinHandle, 0, 0, Height, Width);
 
                 HOperatorSet.DispObj(ho_Image, hv_ExpDefaultWinHandle);
+                HOperatorSet.Emphasize(ho_Image, out ho_ImageEmphasize, 201, 201 ,1);
+                //HOperatorSet.ZoomImageFactor(ho_Image, out ho_Image, 1.5, 1.5, "constant");
+                
 
+                //HOperatorSet.GaussFilter(ho_Image, out ho_Image, 3);
                 //hv_MeasThreshAbsValue = 10.0;
                 //hv_CodeTypes = "auto";
                 hv_CodeTypes[0] = "Code 128";
@@ -275,21 +280,29 @@ namespace SortCommon
                 HOperatorSet.SetLineWidth(hv_ExpDefaultWinHandle, 4);
 
                 HOperatorSet.CreateBarCodeModel(new HTuple(), new HTuple(), out hv_BarCodeHandle);
-                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "meas_thresh_abs", hv_MeasThreshAbsValue);
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_min", 1.0);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_min", 1.5);
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_max", 8);
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "check_char", "present");
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "meas_param_estimation", "true");
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "majority_voting", "true");
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_variable", "true");
+                //HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "start_stop_tolerance", "low");
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "quiet_zone", "true");
                 HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_max", 8);
                 HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "check_char", "present");
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "meas_param_estimation", "true");
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "majority_voting", "true");
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_size_variable", "true");
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "start_stop_tolerance", "low");
-                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "quiet_zone", "true");
-                
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "persistence", 1);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "composite_code", "none");
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "meas_thresh", 0.1);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "num_scanlines", 10);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "min_identical_scanlines", 2);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "max_diff_orient", 10);
+                HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "element_height_min", 8);
 
+               
                 // HOperatorSet.SetBarCodeParam(hv_BarCodeHandle, "stop_after_result_num", 2);
-                ho_SymbolRegions.Dispose();
+                //ho_SymbolRegions.Dispose();
                 HOperatorSet.CountSeconds(out hv_Start);
-                HOperatorSet.FindBarCode(ho_Image, out ho_SymbolRegions, hv_BarCodeHandle, hv_CodeTypes, out hv_DecodedDataStrings);
+                HOperatorSet.FindBarCode(ho_ImageEmphasize, out ho_SymbolRegions, hv_BarCodeHandle, hv_CodeTypes, out hv_DecodedDataStrings);
                 HOperatorSet.CountSeconds(out hv_Stop);
                 hv_Duration = (hv_Stop - hv_Start) * 1000;
                 ho_BarCodeObjects.Dispose();
@@ -324,6 +337,7 @@ namespace SortCommon
                     }
                 }
                 HOperatorSet.ClearBarCodeModel(hv_BarCodeHandle);
+                ho_ImageEmphasize.Dispose();
                 ho_Image.Dispose();
                 ho_SymbolRegions.Dispose();
                 ho_BarCodeObjects.Dispose();
@@ -353,8 +367,6 @@ namespace SortCommon
             this.DataStrings = Datastr;
             this.DataTypes = Dataty;
             this.UseTime = Time;
-
-
         }
     }
 

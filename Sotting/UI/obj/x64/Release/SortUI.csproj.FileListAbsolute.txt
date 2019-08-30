@@ -26,3 +26,4 @@ D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Release\SortUI.csproj.CoreComp
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Release\SortUI.csproj.CopyComplete
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Release\UI.exe
 D:\Work1\mySortting\mySortting\Sotting\UI\obj\x64\Release\UI.pdb
+D:\Work1\mySortting\mySortting\Sotting\UI\bin\x64\Release\CLIDelegate.dll

@@ -3,3 +3,16 @@ D:\Work1\mySortting\mySortting\Sotting\SortModel\bin\x64\Debug\SortModel.pdb
 D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csproj.CoreCompileInputs.cache
 D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.dll
 D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.pdb
+D:\Work1\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csprojAssemblyReference.cache
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\bin\x64\Debug\SortModel.dll
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\bin\x64\Debug\SortModel.pdb
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csprojAssemblyReference.cache
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csproj.CoreCompileInputs.cache
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.dll
+C:\新建文件夹\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.pdb
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\bin\x64\Debug\SortModel.dll
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\bin\x64\Debug\SortModel.pdb
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csprojAssemblyReference.cache
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.csproj.CoreCompileInputs.cache
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.dll
+C:\Users\aa\Desktop\谢非\mySortting\mySortting\mySortting\mySortting\Sotting\SortModel\obj\x64\Debug\SortModel.pdb

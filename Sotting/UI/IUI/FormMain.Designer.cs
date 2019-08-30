@@ -45,6 +45,7 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbRun = new System.Windows.Forms.Label();
             this.lbCemra = new System.Windows.Forms.Label();
             this.lbNetwork = new System.Windows.Forms.Label();
             this.lbWeighter = new System.Windows.Forms.Label();
@@ -130,7 +131,7 @@
             this.lbDestination.Name = "lbDestination";
             this.lbDestination.Size = new System.Drawing.Size(231, 33);
             this.lbDestination.TabIndex = 2;
-            this.lbDestination.Text = "速率";
+            this.lbDestination.Text = "目的地";
             this.lbDestination.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbWeight
@@ -245,6 +246,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkKhaki;
             this.tableLayoutPanel1.SetColumnSpan(this.panel1, 2);
+            this.panel1.Controls.Add(this.lbRun);
             this.panel1.Controls.Add(this.lbCemra);
             this.panel1.Controls.Add(this.lbNetwork);
             this.panel1.Controls.Add(this.lbWeighter);
@@ -253,6 +255,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(947, 15);
             this.panel1.TabIndex = 5;
+            // 
+            // lbRun
+            // 
+            this.lbRun.AutoSize = true;
+            this.lbRun.BackColor = System.Drawing.Color.Red;
+            this.lbRun.Location = new System.Drawing.Point(94, 0);
+            this.lbRun.Name = "lbRun";
+            this.lbRun.Size = new System.Drawing.Size(41, 12);
+            this.lbRun.TabIndex = 4;
+            this.lbRun.Text = "跑步机";
             // 
             // lbCemra
             // 
@@ -268,7 +280,7 @@
             // 
             this.lbNetwork.AutoSize = true;
             this.lbNetwork.BackColor = System.Drawing.Color.Red;
-            this.lbNetwork.Location = new System.Drawing.Point(97, 0);
+            this.lbNetwork.Location = new System.Drawing.Point(153, 0);
             this.lbNetwork.Name = "lbNetwork";
             this.lbNetwork.Size = new System.Drawing.Size(29, 12);
             this.lbNetwork.TabIndex = 1;
@@ -330,7 +342,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
-            this.Text = "分拣管理";
+            this.Text = "快手V1.03";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
@@ -370,5 +382,6 @@
         private System.Windows.Forms.Label lbWeighter;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.Label lbRun;
     }
 }
